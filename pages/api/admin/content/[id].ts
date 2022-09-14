@@ -14,7 +14,7 @@ export default async function handler(
   const {id} = req.query;
   if(process.env.NEXT_PUBLIC_DOMAIN_ID && id && !Array.isArray(id)) {
     const content = await getContent(process.env.NEXT_PUBLIC_DOMAIN_ID, id);
-    res.status(200).json({ content: content })
+    res.status(200).json(content)
   } else {
     return res.status(400).json({ error: { messsage: "クエリが不正です" } });
   }
