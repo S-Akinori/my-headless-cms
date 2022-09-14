@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: var(--main-color);
+}
+.headerRight {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}

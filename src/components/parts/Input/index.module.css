@@ -1,0 +1,33 @@
+.inputGroup {
+  position: relative;
+}
+.label {
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  z-index: 1;
+  transform: translateY(-50%);
+  display: block;
+  padding: 0 0.25rem;
+  margin-bottom: .25rem;
+  transition: 300ms;
+}
+
+.label.active {
+  top: 0;
+  font-size: 0.75rem;
+  background: #FFF;
+}
+
+.input {
+  display: block;
+  padding: 1rem;
+  border-radius: .5rem;
+  border: 1px solid #aaa;
+  transition: 300ms;
+  width: 100%;
+}
+.input:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem #87cefa;
+}

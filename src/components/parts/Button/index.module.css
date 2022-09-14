@@ -1,0 +1,25 @@
+.button {
+  display: inline-block;
+  padding: .5rem 1rem;
+  background: var(--main-color);
+  transition: all 300ms;
+}
+.button:hover {
+  opacity: 0.8;
+}
+
+.button.none {
+  background: none;
+}
+.button.base {
+  background: var(--base-color);
+  color: var(--base-cont);
+}
+.button.main {
+  background: var(--main-color);
+  color: var(--main-cont);
+}
+.button.accent {
+  background: var(--accent-color);
+  color: var(--accent-cont);
+}

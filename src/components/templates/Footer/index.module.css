@@ -1,0 +1,17 @@
+.footer {
+  padding: 1rem;
+  background: var(--main-color);
+}
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+}
+.footerNav {
+  width: max-content;
+  margin: auto;
+}
+.copyright {
+  width: max-content;
+  margin: auto;
+  font-size: 0.75rem;
+}
