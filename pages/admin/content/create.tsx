@@ -29,7 +29,7 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
   const [selectedContentType, setSelectedContentType] = useState<ContentType | null>(null)
   const [contentObject, setContentObject] = useState<{[key: string]: string }>({});
 
-  const selectContentType = (e: Event, contentType: ContentType) => {
+  const selectContentType = (contentType: ContentType) => {
     setSelectedContentType(contentType);
     setCurrentContent({
       ...currentContent,
@@ -75,7 +75,7 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
             </div>
             <ul className="mb-4">
               {contentTypes && contentTypes.map(contentType => (
-                <li key={contentType.id}><Button onClick={(e) => selectContentType(e, contentType)}>{contentType.title}</Button></li>
+                <li key={contentType.id}><Button onClick={(e) => selectContentType(contentType)}>{contentType.title}</Button></li>
               ))}
             </ul>
           </div>

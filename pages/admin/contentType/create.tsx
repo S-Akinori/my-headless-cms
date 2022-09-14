@@ -35,7 +35,7 @@ const AdminContentTypeCreatePage = () => {
     setTargetItem(newItem)
   }
 
-  const onClickSetTarget = (e: Event, contentTypeItem: ContentTypeItem) => {
+  const onClickSetTarget = (contentTypeItem: ContentTypeItem) => {
     setTargetItem(contentTypeItem)
   }
 
@@ -88,7 +88,7 @@ const AdminContentTypeCreatePage = () => {
           </ul>
           <ul>
           {currentContentTypeItems && currentContentTypeItems.map(item => (
-            <li key={item.id}><Button color="none" onClick={(e) => onClickSetTarget(e, item)}>{item.title}</Button></li>
+            <li key={item.id}><Button color="none" onClick={(e) => onClickSetTarget(item)}>{item.title}</Button></li>
           ))}
           </ul>
           <div className="text-right">
