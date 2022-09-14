@@ -39,4 +39,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, ChildProps>(
   );
 })
 
+TextArea.displayName = 'TextArea'
+
 export default TextArea
