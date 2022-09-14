@@ -22,7 +22,7 @@ const AdminContentTypeCreatePage = () => {
   const [currentContentTypeItems, setCurrentContentTypeItems] = useState<ContentTypeItem[]>([]);
   const [targetItem, setTargetItem] = useState<ContentTypeItem>()
 
-  const onClick = (e: Event, contentTypeItem:ContentTypeItem) => {
+  const onClick = (contentTypeItem:ContentTypeItem) => {
     const id = generateId();
     const newItem = {
       ...contentTypeItem,
@@ -82,7 +82,7 @@ const AdminContentTypeCreatePage = () => {
           <ul className="flex flex-wrap">
             {contentTypeItems.map(item => (
               <div className="p-4" key={item.id}>
-                <Button onClick={(e) => onClick(e, item)}>{item.title}</Button>
+                <Button onClick={(e) => onClick(item)}>{item.title}</Button>
               </div>
             ))}
           </ul>
