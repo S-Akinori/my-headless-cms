@@ -30,6 +30,8 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
   const [selectedContentType, setSelectedContentType] = useState<ContentType | null>(null)
   const [contentObject, setContentObject] = useState<ContentObject>({});
 
+  console.log(contentObject)
+
   const selectContentType = (contentType: ContentType) => {
     setSelectedContentType(contentType);
     setCurrentContent({
@@ -50,8 +52,6 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
       })
     }
   }
-
-  console.log(contentObject)
 
   const onChange : ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = async (e) => {
     const name = e.currentTarget.name
@@ -85,6 +85,7 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
               [inputName]: value
             })
           }
+          console.log(newContentObject)
   
           setContentObject({
             ...contentObject,
@@ -101,12 +102,14 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
       const value: string = e.currentTarget.value
       const key = Object.keys(contentObject).find(key => key === parentName)
       if(key && Array.isArray(contentObject[parentName])) {
-        const newContentObject = (contentObject[parentName] as ContentObject[]).map((item, i) => (i === index) ? {...contentObject[parentName][i], [inputName]: value} : item)
+        const newContentObject = (contentObject[parentName] as ContentObject[]).map((item, i) => (i === index) ? {...item, [inputName]: value} : item)
         if(newContentObject.length === index) {
           newContentObject.push({
             [inputName]: value
           })
         }
+
+        console.log(newContentObject)
 
         setContentObject({
           ...contentObject,

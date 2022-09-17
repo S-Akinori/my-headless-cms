@@ -19,5 +19,5 @@ export interface ImageObject {
 }
 
 export interface ContentObject {
-  [key: string]: string | ImageObject | {[key: string]: string}[]
+  [key: string]: string | ImageObject | ContentObject[]
 }
