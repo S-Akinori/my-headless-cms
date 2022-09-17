@@ -5,6 +5,7 @@ import ContentType from "src/types/ContentType";
 import Container from "src/components/parts/Container";
 import Button from "src/components/parts/Button";
 import Box from "src/components/parts/Box";
+import Link from "next/link";
 
 interface Props {
   contentTypes: ContentType[];
@@ -38,6 +39,7 @@ const AdminContentTypesIndexPage = ({contentTypes}: Props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const contentTypes = await getContentTypes(process.env.NEXT_PUBLIC_DOMAIN_ID as string);
+  console.log(contentTypes)
   return {
     props: {
       contentTypes

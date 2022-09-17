@@ -14,7 +14,6 @@ const firebaseConfig = {
 };
 
 const appLen = getApps().length
-console.log(appLen)
 const app = !appLen ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);

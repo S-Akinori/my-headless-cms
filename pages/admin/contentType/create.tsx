@@ -22,16 +22,29 @@ const AdminContentTypeCreatePage = () => {
   const [currentContentTypeItems, setCurrentContentTypeItems] = useState<ContentTypeItem[]>([]);
   const [targetItem, setTargetItem] = useState<ContentTypeItem>()
 
-  const onClick = (contentTypeItem:ContentTypeItem) => {
+  const onClick = (contentTypeItem: ContentTypeItem) => {
     const id = generateId();
     const newItem = {
       ...contentTypeItem,
       id: id,
     }
-    setCurrentContentTypeItems([
-      ...currentContentTypeItems,
-      newItem
-    ])
+    if(targetItem && targetItem.type === 'フィールドセット') {
+      const items = targetItem.items || [];
+      newItem.parentId = targetItem.id
+      const newTargetItem: ContentTypeItem = {
+        ...targetItem,
+        items: [
+          ...items,
+          newItem
+        ]
+      }
+      setCurrentContentTypeItems(currentContentTypeItems.map(item => (item.id === targetItem.id) ? newTargetItem : item))
+    } else {
+      setCurrentContentTypeItems([
+        ...currentContentTypeItems,
+        newItem
+      ])
+    }
     setTargetItem(newItem)
   }
 
@@ -46,10 +59,24 @@ const AdminContentTypeCreatePage = () => {
         ...targetItem,
         [name]: value,
       }
-      const index = currentContentTypeItems.findIndex(item => item.id === newTargetItem.id);
-      setCurrentContentTypeItems(
-        currentContentTypeItems.map((item, i) => (i === index ? newTargetItem : item))
-      )
+      
+      if(targetItem.parentId) {
+        const targetItemParent = currentContentTypeItems.find(item => item.id === targetItem.parentId);
+        if(targetItemParent && targetItemParent.items) {
+          const newTargetItemParent = {
+            ...targetItemParent,
+            items: targetItemParent?.items?.map(item => item.id === targetItem.id ? newTargetItem : item)
+          }
+          setCurrentContentTypeItems(
+            currentContentTypeItems.map(item => item.id === targetItemParent?.id ? newTargetItemParent : item)
+          )
+        }
+      } else {
+        const index = currentContentTypeItems.findIndex(item => item.id === targetItem.id);
+        setCurrentContentTypeItems(
+          currentContentTypeItems.map((item, i) => (i === index ? newTargetItem : item))
+        )
+      }
       setTargetItem(newTargetItem)
     }
   }
@@ -87,8 +114,17 @@ const AdminContentTypeCreatePage = () => {
             ))}
           </ul>
           <ul>
-          {currentContentTypeItems && currentContentTypeItems.map(item => (
-            <li key={item.id}><Button color="none" onClick={(e) => onClickSetTarget(item)}>{item.title}</Button></li>
+          {currentContentTypeItems && currentContentTypeItems.map(contentTypeItem => (
+            <li key={contentTypeItem.id}>
+              <Button color="none" onClick={(e) => onClickSetTarget(contentTypeItem)}>{contentTypeItem.title}</Button>
+              {contentTypeItem.items && (
+                <ul className="pl-4">
+                  {contentTypeItem.items.map(item => (
+                    <li key={item.id}><Button color="none" onClick={(e) => onClickSetTarget(item)}>{item.title}</Button></li>
+                  ))}
+                </ul>
+              )}
+            </li>
           ))}
           </ul>
           <div className="text-right">
@@ -107,6 +143,16 @@ const AdminContentTypeCreatePage = () => {
           <div className="mb-6">
             <Input label="種類" name="type" value={targetItem.type} disabled onChange={onChange} />
           </div>
+          {targetItem.type === 'フィールドセット' && (
+            <div>
+              <div>項目追加</div>
+              <ul>
+                {contentTypeItems.map(item => (
+                  <li key={item.id}><Button color="none" onClick={(e) => onClick(item)}>{item.title}</Button></li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </Layout>   

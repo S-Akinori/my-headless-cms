@@ -7,6 +7,7 @@ import Button from "src/components/parts/Button";
 import Box from "src/components/parts/Box";
 import { Content } from "src/types/Content";
 import { useEffect } from "react";
+import Link from "next/link";
 
 interface Props {
   contents: Content[];
@@ -21,9 +22,13 @@ const AdminContentsIndexPage = ({contents}: Props) => {
         {contents && contents.map(content => (
           <li key={content.id} className="mb-6 ">
             <Box>
-              ID: {content.id} <br />
-              コード: {content.name} <br />
-              名前: {content.title} <br />
+              <Link href={'/admin/content/' + content.id}>
+                <a>
+                  ID: {content.id} <br />
+                  コード: {content.name} <br />
+                  名前: {content.title} <br />
+                </a>
+              </Link>
             </Box>
           </li>
         ))}
