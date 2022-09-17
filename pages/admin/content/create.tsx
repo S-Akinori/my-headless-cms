@@ -51,6 +51,8 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
     }
   }
 
+  console.log(contentObject)
+
   const onChange : ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = async (e) => {
     const name = e.currentTarget.name
     const nameArr = name.split('__') // this name should be 'parent__input__index'
@@ -77,7 +79,7 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
 
         const key = Object.keys(contentObject).find(key => key === parentName)
         if(key && Array.isArray(contentObject[parentName])) {
-          const newContentObject = (contentObject[parentName] as ContentObject[]).map((item, i) => (i === index) ? {...contentObject[parentName][i], [inputName]: value} : item)
+          const newContentObject = (contentObject[parentName] as ContentObject[]).map((item, i) => (i === index) ? {...item, [inputName]: value} : item)
           if(newContentObject.length === index) {
             newContentObject.push({
               [inputName]: value
