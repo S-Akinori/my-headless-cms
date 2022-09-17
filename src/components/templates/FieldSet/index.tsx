@@ -3,7 +3,6 @@ import Button from "src/components/parts/Button"
 import Input from "src/components/parts/Input"
 import TextArea from "src/components/parts/TextArea"
 import ContentType, { ContentTypeItem } from "src/types/ContentType"
-import ContentInput from "../ContentInput"
 
 interface Props {
   fieldset: ContentType
