@@ -23,7 +23,8 @@ return (
     <Head>
       <link rel="icon" href="/favicon.ico" />
       <title>{pageTitle}</title>
-      {process.env.NEXT_PUBLIC_ENV !== 'production' && <meta name="robots" content="noindex, nofollow" />}
+      {/* {process.env.NEXT_PUBLIC_ENV !== 'production' && <meta name="robots" content="noindex, nofollow" />} */}
+      <meta name="robots" content="noindex, nofollow" />
       <meta name="description" content={pageDescription} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta charSet="utf-8" />
