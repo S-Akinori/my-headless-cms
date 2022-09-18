@@ -72,7 +72,7 @@ const AdminContentCreatePage = ({contentTypes}: Props) => {
         const imageRef = await addFile('MtDx5o2bav9hxzQxyshx', file);
         const value: ImageObject = {
           path: imageRef.fullPath,
-          url: `${process.env.NEXT_PUBLIC_STORAGE_DOMAIN}/v0/b/${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/o/${encodeURI(imageRef.fullPath)}?alt=media`,
+          url: `${process.env.NEXT_PUBLIC_STORAGE_DOMAIN}/v0/b/${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/o/${encodeURIComponent(imageRef.fullPath)}?alt=media`,
           width: result.width,
           height: result.height
         }
