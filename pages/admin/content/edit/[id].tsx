@@ -191,7 +191,7 @@ const AdminContentEditPage = () => {
                     {item.type === '画像' && (
                       <div>
                         <Input type="file" name={item.name} onChange={onChange} />
-                        <Img
+                        <Img.default
                           src={(contentObject[item.name] as ImageObject).url}
                           width={(contentObject[item.name] as ImageObject).width}
                           height={(contentObject[item.name] as ImageObject).height}
