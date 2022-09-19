@@ -22,7 +22,7 @@ const AdminContentsIndexPage = ({contents}: Props) => {
         {contents && contents.map(content => (
           <li key={content.id} className="mb-6 ">
             <Box>
-              <Link href={'/admin/content/' + content.id}>
+              <Link href={'/admin/content/edit/' + content.id}>
                 <a>
                   ID: {content.id} <br />
                   コード: {content.name} <br />

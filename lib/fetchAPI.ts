@@ -1,4 +1,4 @@
-import { collection, getDocs, QueryDocumentSnapshot, DocumentData, addDoc, doc, getDoc, setDoc, serverTimestamp, Timestamp } from "firebase/firestore"; 
+import { collection, getDocs, QueryDocumentSnapshot, DocumentData, addDoc, doc, getDoc, setDoc, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore"; 
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { Content } from "src/types/Content";
 import ContentType from "src/types/ContentType";
@@ -26,6 +26,20 @@ export const getContentTypes = async (id: string) => {
   return docs;
 }
 
+export const getContentType = async (domainId : string, docId: string) => {
+  const docRef = doc(db, "domains", domainId, "contentTypes", docId);
+  const docSnap = await getDoc(docRef);
+  const contentType = docSnap.data() as ContentType
+  if(contentType.dateFormat === 'string') {
+    contentType.createdAt = contentType.createdAt!
+    contentType.updatedAt = contentType.updatedAt!
+  } else {
+    contentType.createdAt = (contentType.createdAt! as Timestamp).toDate().toString();
+    contentType.updatedAt = (contentType.updatedAt! as Timestamp).toDate().toString()
+  }
+  return contentType;
+}
+
 export const addContentType = async (id: string, contentType: ContentType) => {
   const timestamp = serverTimestamp();
   await setDoc(doc(db, "domains", id, "contentTypes", contentType.id), {
@@ -35,12 +49,22 @@ export const addContentType = async (id: string, contentType: ContentType) => {
     updatedAt: timestamp
   })
 }
+
 export const addContent = async (id: string, content: Content) => {
   const timestamp = serverTimestamp();
   await setDoc(doc(db, "domains", id, "contents", content.id), {
     ...content,
     dateformat: 'timestamp',
     createdAt: timestamp,
+    updatedAt: timestamp
+  })
+}
+
+export const editContent = async (id: string, content: Content) => {
+  const timestamp = serverTimestamp();
+  await updateDoc(doc(db, "domains", id, "contents", content.id), {
+    ...content,
+    dateformat: 'timestamp',
     updatedAt: timestamp
   })
 }
@@ -72,10 +96,10 @@ export const getContent = async (domainId : string, docId: string) => {
   const docSnap = await getDoc(docRef);
   const content = docSnap.data() as Content
   if(content.dateFormat === 'string') {
-    content.createdAt = content.createdAt!
+    // content.createdAt = content.createdAt!
     content.updatedAt = content.updatedAt!
   } else {
-    content.createdAt = (content.createdAt! as Timestamp).toDate().toString();
+    // content.createdAt = (content.createdAt! as Timestamp).toDate().toString();
     content.updatedAt = (content.updatedAt! as Timestamp).toDate().toString()
   }
   return content;

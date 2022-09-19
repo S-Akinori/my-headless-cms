@@ -15,7 +15,6 @@ const AdminContentsDetailPage = () => {
   const router = useRouter();
   const {id} = router.query
   const [content, setContent] = useState<Content>()
-  console.log(content)
 
   useEffect(() => {
     if(id) {
